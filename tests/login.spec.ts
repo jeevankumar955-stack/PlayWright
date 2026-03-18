@@ -13,8 +13,9 @@ await password.fill("Password123");
 await login.click();
 const pageTitle=await page.title();
 console.log(pageTitle);
+
 await page.screenshot({path:'homepage.png'});
-expect(pageTitle).toEqual("Logged In Successfully | Practice Test Automation125")
+expect(pageTitle).toEqual("Logged In Successfully | Practice Test Automation")
 browser.close();
 
 
