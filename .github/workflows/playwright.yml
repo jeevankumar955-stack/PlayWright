@@ -42,9 +42,9 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install
 
-      # Run Playwright tests (force headless mode to avoid XServer error)
+      # Run Playwright tests (headless mode is set in config, not CLI)
       - name: Run Playwright tests
-        run: npx playwright test --headless
+        run: npx playwright test
 
       # Install Allure CLI
       - name: Install Allure CLI
