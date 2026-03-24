@@ -1,24 +1,47 @@
-import{test, expect, Browser,  Page, Locator} from  '@playwright/test'
-import { firefox } from '@playwright/test'
-test('login test', async()=>{
+import { expect } from '@playwright/test';
+import { test } from './fixtures';
+import { LoginPage } from './pages/LoginPage';
+import { ExceptionsPage } from './pages/ExceptionsPage';
+import { writeAutoHealReport } from './utils/autoHeal';
+import { TestTablePage } from './pages/TestTablePage'
+import testData from './utils/testData.json';
+test('global login with exceptions', async ({ loggedInPage }) => {
+  const loginPage = new LoginPage(loggedInPage);
+  const exceptionsPage = new ExceptionsPage(loggedInPage);
 
-const browser:Browser = await  firefox.launch({headless:false});
-const page:Page = await browser.newPage();
-await page.goto("https://practicetestautomation.com/practice-test-login/");
-const userName:Locator = await page.locator('#username');
-const password:Locator = await page.locator('#password');
-const login:Locator = await page.locator('#submit');
-await userName.fill("student");
-await password.fill("Password123");
-await login.click();
-const pageTitle=await page.title();
-console.log(pageTitle);
+  // Navigate via Practice link
+  await loginPage.clickPractice();
 
-await page.screenshot({path:'homepage.png'});
-expect(pageTitle).toEqual("Logged In Successfully | Practice Test Automation")
-browser.close();
+  // Then go to Exceptions
+  await exceptionsPage.clickTestExceptions();
+  await exceptionsPage.addRow();
 
+  await expect(exceptionsPage.inputFields).toHaveCount(2);
+  await exceptionsPage.fillNewRow("Second row value");
 
+  const count = await exceptionsPage.inputFields.count();
+  console.log(`Row count: ${count}`);
 
+  writeAutoHealReport();
+});
 
-})  
+test('Validate table columns values ', async ({ loggedInPage }) => {
+  const loginPage = new LoginPage(loggedInPage);
+  const exceptionsPage = new ExceptionsPage(loggedInPage);
+
+  // Navigate via Practice link
+    const tablePage = new TestTablePage(loggedInPage);
+  await loginPage.clickPractice();
+  // Click the Test Table link
+  await tablePage.clickTestTable();
+  const drop = await tablePage.getAllSortOptions();
+   console.log('drop:', drop);
+  // Validate course column
+   const actualCourses = await tablePage.getCourseNames();
+  console.log('Courses:', actualCourses);
+
+  await tablePage.selectSortOption('Level');
+
+  expect(actualCourses).toEqual(testData.expectedCourses);
+   expect(actualCourses).toContain('Selenium Framework');
+});
