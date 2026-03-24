@@ -23,11 +23,18 @@ jobs:
         with:
           node-version: 18
 
+      # Cache Playwright browsers to speed up installs
+      - name: Cache Playwright
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+
       # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Install Playwright browsers
+      # Install Playwright browsers (uses cache if available)
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
