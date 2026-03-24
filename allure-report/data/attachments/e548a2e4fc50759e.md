@@ -1,0 +1,50 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Press \"Enter\" to skip to content" [ref=e2]:
+    - /url: "#main-container"
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - generic [ref=e6]:
+        - generic:
+          - navigation
+      - link "Practice Test Automation" [ref=e10]:
+        - /url: https://practicetestautomation.com/
+        - img "Practice Test Automation" [ref=e11]
+      - navigation [ref=e16]:
+        - navigation [ref=e17]:
+          - list [ref=e18]:
+            - listitem [ref=e19]:
+              - link "Home" [ref=e20]:
+                - /url: https://practicetestautomation.com/
+            - listitem [ref=e21]:
+              - link "Practice" [ref=e22]:
+                - /url: https://practicetestautomation.com/practice/
+            - listitem [ref=e23]:
+              - link "Courses" [ref=e24]:
+                - /url: https://practicetestautomation.com/courses/
+            - listitem [ref=e25]:
+              - link "Blog" [ref=e26]:
+                - /url: https://practicetestautomation.com/blog/
+            - listitem [ref=e27]:
+              - link "Contact" [ref=e28]:
+                - /url: https://practicetestautomation.com/contact/
+    - main [ref=e29]:
+      - article [ref=e32]:
+        - heading "Logged In Successfully" [level=1] [ref=e34]
+        - generic [ref=e35]:
+          - paragraph [ref=e36]:
+            - strong [ref=e37]: Congratulations student. You successfully logged in!
+          - link "Log out" [ref=e41]:
+            - /url: https://practicetestautomation.com/practice-test-login/
+          - paragraph
+    - contentinfo:
+      - generic [ref=e43]:
+        - text: © Copyright 2020
+        - link "Practice Test Automation." [ref=e44]:
+          - /url: https://practicetestautomation.com/
+        - text: All rights reserved |
+        - link "Privacy Policy" [ref=e45]:
+          - /url: https://practicetestautomation.com/privacy-policy/
+```

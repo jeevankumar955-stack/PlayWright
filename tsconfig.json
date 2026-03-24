@@ -16,5 +16,8 @@
     },
     "resolveJsonModule": true
   },
-  "include": ["tests", "playwright.config.ts"]
+  "include": ["tests", "playwright.config.ts"],
+  "scripts": {
+  "test:allure": "rm -rf allure-results && npx playwright test"
+}
 }
