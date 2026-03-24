@@ -44,7 +44,7 @@ jobs:
 
       # Run Playwright tests (force headless mode to avoid XServer error)
       - name: Run Playwright tests
-        run: npx playwright test --headed=false
+        run: npx playwright test --headless
 
       # Install Allure CLI
       - name: Install Allure CLI
