@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test } from './fixtures';
+import { test } from './Fixtures';
 import { LoginPage } from './pages/LoginPage';
 import { ExceptionsPage } from './pages/ExceptionsPage';
 import { writeAutoHealReport } from './utils/autoHeal';
@@ -9,7 +9,7 @@ test('global login with exceptions', async ({ loggedInPage }) => {
   const loginPage = new LoginPage(loggedInPage);
   const exceptionsPage = new ExceptionsPage(loggedInPage);
 
-  // Navigate via Practice link
+  // Navigate via Practice link 
   await loginPage.clickPractice();
 
   // Then go to Exceptions
