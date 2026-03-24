@@ -10,14 +10,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # Opt into Node.js 24 early
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # Opt into Node.js 24 now
 
     steps:
-      # Checkout code (updated to v4)
+      # Checkout code (Node.js 24 compatible)
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Setup Node.js (updated to v4)
+      # Setup Node.js (Node.js 24 compatible)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -43,7 +43,7 @@ jobs:
       - name: Generate Allure report
         run: allure generate allure-results --clean -o allure-report
 
-      # Upload Allure report as artifact (updated to v4)
+      # Upload Allure report as artifact (v4)
       - name: Upload Allure report
         uses: actions/upload-artifact@v4
         with:
