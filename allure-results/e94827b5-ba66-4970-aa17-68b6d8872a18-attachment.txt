@@ -1,7 +1,0 @@
-Courses: [
-  'Java',   'Java',
-  'Java',   'Java',
-  'Java',   'Java',
-  'Any',    'Python',
-  'Python'
-]
