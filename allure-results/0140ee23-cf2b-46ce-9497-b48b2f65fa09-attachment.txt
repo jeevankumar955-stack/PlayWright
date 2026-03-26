@@ -1,0 +1,10 @@
+Dropdown options: []
+drop: []
+Courses: [
+  'Java',   'Java',
+  'Any',    'Java',
+  'Java',   'Java',
+  'Java',   'Python',
+  'Python'
+]
+Selected 'Level' from dropdown

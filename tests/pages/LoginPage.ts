@@ -50,7 +50,7 @@ export class LoginPage {
    async clickPractice() {
     const practiceLink = await autoHealLocator(this.page, this.practiceLinkSelectors);
     await practiceLink.click();
-  }
+  } 
 
   async clickTestExceptions() {
     const testExceptionsLink = await autoHealLocator(this.page, this.testExceptionsLinkSelectors);

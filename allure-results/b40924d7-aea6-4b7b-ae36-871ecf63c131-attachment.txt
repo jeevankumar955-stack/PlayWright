@@ -1,0 +1,11 @@
+Courses: [
+  'Selenium Framework',
+  'Selenium with Java',
+  'XPath Locators',
+  'Advanced Selenium',
+  'REST Assured',
+  'Selenium Grid',
+  'Java for Testers',
+  'Selenium with Python',
+  'Python for Testers'
+]

@@ -4,7 +4,8 @@ export class TestTablePage {
   readonly page: Page;
   readonly testTableLink: Locator;
   readonly courseCells: Locator;
- readonly sortByDropDown: Locator;
+  readonly sortByDropDown: Locator;
+
   constructor(page: Page) {
     this.page = page;
     this.testTableLink = page.locator("//a[text()='Test Table']");
@@ -12,12 +13,23 @@ export class TestTablePage {
     this.sortByDropDown = page.locator("//select[@id='sortBy']");
   }
 
+  getLanguageInput(value: string): Locator {
+    return this.page.locator(`//input[@value='${value}']`);
+  }
+
+  getCourseCell(columnHeader: string): Locator {
+    return this.page.locator(`//td[@headers='${columnHeader}']`);
+  }
+
   async clickTestTable() {
     await this.testTableLink.click();
   }
 
-   async getAllSortOptions(): Promise<string[]> {
-    // Grab all <option> elements inside the dropdown
+  async clickOnLanguageRadioButton(language: string) {
+    await this.getLanguageInput(language).click();
+  }
+
+  async getAllSortOptions(): Promise<string[]> {
     const options = this.sortByDropDown.locator("option");
     const count = await options.count();
     const values: string[] = [];
@@ -30,27 +42,24 @@ export class TestTablePage {
     return values;
   }
 
-async selectSortOption(optionLabel: string) {
-  await this.sortByDropDown.selectOption({ label: optionLabel });
-  console.log(`Selected '${optionLabel}' from dropdown`);
-}
+  async selectSortOption(optionLabel: string) {
+    await this.sortByDropDown.selectOption({ label: optionLabel });
+    console.log(`Selected '${optionLabel}' from dropdown`);
+  }
 
-
-  async scrollToCourseCell(index: number = 0) {
-    const cell = this.courseCells.nth(index);
+  async scrollToCourseCell(columnHeader: string, index: number = 0) {
+    const cell = this.getCourseCell(columnHeader).nth(index);
     await cell.scrollIntoViewIfNeeded();
     return cell;
   }
 
-  async getCourseNames(): Promise<string[]> {
-    await this.scrollToCourseCell();
-    const count = await this.courseCells.count();
+  async getCourseNames(columnHeader: string): Promise<string[]> {
+    const cells = this.getCourseCell(columnHeader);
+    const count = await cells.count();
     const courses: string[] = [];
 
-    // Traditional for loop
     for (let i = 0; i < count; i++) {
-      const cell = this.courseCells.nth(i);
-      await cell.scrollIntoViewIfNeeded();   // scroll each cell before reading
+      const cell = cells.nth(i);
       const text = await cell.innerText();
       courses.push(text);
     }
